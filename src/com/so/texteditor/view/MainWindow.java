@@ -8,13 +8,14 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.so.texteditor.controller.MainTextListener;
 import com.so.texteditor.model.TextEditorModel;
 
 public class MainWindow extends JFrame {
 	
 	JPanel mainPanel;
 	MyToolBar toolBar;
-	JTextArea textArea;
+	private static JTextArea textArea;
 	
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,11 +30,16 @@ public class MainWindow extends JFrame {
 		
 		textArea = new JTextArea();
 		textArea.setText(TextEditorModel.getText());
+		textArea.getDocument().addDocumentListener(new MainTextListener());
 		
 		JScrollPane scroller = new JScrollPane(textArea);
 		JScrollBar bar = new JScrollBar();
 		scroller.add(bar);
 		mainPanel.add(scroller, BorderLayout.CENTER);
 		
+	}
+	
+	public static void refreshText() {
+		textArea.setText(TextEditorModel.getText());
 	}
 }
