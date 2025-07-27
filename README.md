@@ -1,1 +1,1 @@
-# text-editor-java
+# A Java Text-Editor
